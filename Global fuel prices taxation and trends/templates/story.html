@@ -1,0 +1,189 @@
+{% extends "base.html" %}
+
+{% block title %}Tableau Story - Global Fuel Analytics{% endblock %}
+
+{% block content %}
+<div class="container py-4">
+    <!-- Breadcrumb & Page Header -->
+    <div class="d-flex flex-column flex-md-row justify-content-between align-items-md-center mb-4">
+        <div>
+            <nav aria-label="breadcrumb">
+                <ol class="breadcrumb mb-1">
+                    <li class="breadcrumb-item"><a href="{{ url_for('home') }}" class="text-decoration-none">Home</a></li>
+                    <li class="breadcrumb-item active" aria-current="page">Story</li>
+                </ol>
+            </nav>
+            <h1 class="fw-bold text-navy mb-0">Global Fuel Trends: Guided Story</h1>
+            <p class="text-muted small mb-0">
+                A structured visual narrative tracing the trajectory of global crude oil benchmarks, retail pump prices, and government taxation policies.
+            </p>
+        </div>
+
+        <div class="mt-3 mt-md-0 d-flex gap-2">
+            <button id="btn-fullscreen" class="btn btn-sm btn-outline-secondary">
+                <i class="bi bi-arrows-fullscreen"></i> Fullscreen
+            </button>
+            <a href="{{ story_url }}" target="_blank" rel="noopener noreferrer" class="btn btn-sm btn-primary" style="background-color: #0d9488; border-color: #0d9488;">
+                <i class="bi bi-box-arrow-up-right me-1"></i> Open Story in Tableau Public
+            </a>
+        </div>
+    </div>
+
+    <!-- Instructions Notice -->
+    <div class="info-callout">
+        <div class="info-callout-title">
+            <i class="bi bi-journal-bookmark-fill"></i> Integrating Your Tableau Story:
+        </div>
+        <p class="info-callout-text">
+            To link your custom Tableau Story, paste your published Story URL into <code>TABLEAU_CONFIG["STORY_URL"]</code> inside <code>app.py</code>. The story points below provide a structured framework to document your empirical findings once your Tableau analysis is finalized.
+        </p>
+    </div>
+
+    <!-- Narrative Introduction Section -->
+    <div class="card border-0 shadow-sm p-4 mb-4" style="background: #ffffff; border-radius: 12px;">
+        <h4 class="fw-bold text-navy mb-2"><i class="bi bi-compass text-teal me-2"></i>Story Narrative Introduction</h4>
+        <p class="text-muted mb-0">
+            Why does a liter of petrol cost five to ten times more in one country compared to another, even when both purchase crude oil from the same global market? This Tableau Story provides an empirical journey through global fuel prices, isolating the impact of international benchmarks (Brent Crude USD) from national fiscal decisions, sovereign subsidy shields, and economic development levels.
+        </p>
+    </div>
+
+    <!-- Main Tableau Story Visual Embed -->
+    <div class="tableau-wrapper mb-5" id="tableau-container">
+        <div class="tableau-toolbar">
+            <div class="tableau-status">
+                <span class="status-dot"></span>
+                <span>Tableau Story Mode Active</span>
+            </div>
+            <div class="small text-muted">
+                Navigate sequential story points using the numbered tabs inside the visualization.
+            </div>
+        </div>
+
+        <div class="ratio ratio-16x9" style="min-height: 750px;">
+            <iframe
+                id="tableau-frame"
+                class="tableau-embed-frame"
+                src="{{ story_embed_url | safe }}"
+                title="Global Fuel Prices and Taxation Trends Tableau Story"
+                allowfullscreen="true"
+                loading="lazy">
+            </iframe>
+        </div>
+
+        <!-- Fallback block -->
+        <div class="tableau-fallback mt-3">
+            <i class="bi bi-journal-code"></i>
+            <h5 class="fw-bold text-navy mt-2">Trouble loading the Tableau Story?</h5>
+            <p class="text-muted small mx-auto" style="max-width: 600px;">
+                If your browser security settings block the embedded story, you can open and step through the full story directly on the Tableau Public platform.
+            </p>
+            <a href="{{ story_url }}" target="_blank" rel="noopener noreferrer" class="btn btn-outline-primary btn-sm mt-2">
+                <i class="bi bi-box-arrow-up-right me-1"></i> Open Story Directly on Tableau Public
+            </a>
+        </div>
+    </div>
+
+    <!-- Key Story Findings (Structured Placeholders for Actual Tableau Results) -->
+    <div class="mb-5">
+        <div class="section-header text-center mb-4">
+            <span class="section-tag">Analytical Insights</span>
+            <h3 class="fw-bold text-navy">Key Findings & Story Points</h3>
+            <p class="text-muted small">
+                Summary of key narrative takeaways identified across the Tableau Story visualization sequence.
+            </p>
+        </div>
+
+        <div class="row g-4">
+            <!-- Story Point 1 -->
+            <div class="col-lg-6">
+                <div class="p-4 bg-white border rounded-3 h-100 shadow-sm">
+                    <div class="d-flex align-items-center justify-content-between mb-3">
+                        <span class="badge bg-primary bg-opacity-10 text-primary fw-bold">Story Point 1</span>
+                        <small class="text-muted"><i class="bi bi-bar-chart me-1"></i>Crude Correlation</small>
+                    </div>
+                    <h5 class="fw-bold text-navy">Crude Oil Volatility vs Retail Transmission</h5>
+                    <p class="text-muted small">
+                        <strong>Analytical Focus:</strong> Examining how fluctuations in Brent Crude USD per barrel transmit to domestic pump prices across different economies.
+                    </p>
+                    <div class="p-3 bg-light rounded-2 border border-dashed">
+                        <small class="text-secondary d-block fst-italic">
+                            [Placeholder: Insert your specific statistical findings here once finalized in Tableau — e.g., the degree of correlation between Brent Crude price movements and national retail fuel prices over the observed timeline.]
+                        </small>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Story Point 2 -->
+            <div class="col-lg-6">
+                <div class="p-4 bg-white border rounded-3 h-100 shadow-sm">
+                    <div class="d-flex align-items-center justify-content-between mb-3">
+                        <span class="badge bg-warning bg-opacity-10 text-warning fw-bold">Story Point 2</span>
+                        <small class="text-muted"><i class="bi bi-pie-chart me-1"></i>Taxation Divergence</small>
+                    </div>
+                    <h5 class="fw-bold text-navy">The Global Taxation Divide</h5>
+                    <p class="text-muted small">
+                        <strong>Analytical Focus:</strong> Evaluating the contribution of Tax Percentage to the retail fuel price disparities between high-tax OECD countries and developing nations.
+                    </p>
+                    <div class="p-3 bg-light rounded-2 border border-dashed">
+                        <small class="text-secondary d-block fst-italic">
+                            [Placeholder: Insert your observation regarding which regions exhibit the highest tax share on retail fuel versus regions where fuel taxes are minimal or negative due to subsidies.]
+                        </small>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Story Point 3 -->
+            <div class="col-lg-6">
+                <div class="p-4 bg-white border rounded-3 h-100 shadow-sm">
+                    <div class="d-flex align-items-center justify-content-between mb-3">
+                        <span class="badge bg-success bg-opacity-10 text-success fw-bold">Story Point 3</span>
+                        <small class="text-muted"><i class="bi bi-arrow-left-right me-1"></i>Commodity Spread</small>
+                    </div>
+                    <h5 class="fw-bold text-navy">Diesel vs Petrol vs LPG Dynamics</h5>
+                    <p class="text-muted small">
+                        <strong>Analytical Focus:</strong> Comparing pricing strategies across different refined fuels (Diesel USD Liter, Petrol USD Liter, and LPG USD Liter).
+                    </p>
+                    <div class="p-3 bg-light rounded-2 border border-dashed">
+                        <small class="text-secondary d-block fst-italic">
+                            [Placeholder: Insert findings on how diesel is prioritized or protected due to its impact on freight logistics, compared to consumer gasoline and household LPG consumption.]
+                        </small>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Story Point 4 -->
+            <div class="col-lg-6">
+                <div class="p-4 bg-white border rounded-3 h-100 shadow-sm">
+                    <div class="d-flex align-items-center justify-content-between mb-3">
+                        <span class="badge bg-info bg-opacity-10 text-info fw-bold">Story Point 4</span>
+                        <small class="text-muted"><i class="bi bi-layers me-1"></i>Socioeconomic Tiers</small>
+                    </div>
+                    <h5 class="fw-bold text-navy">Income Classification & Subsidy Dependency</h5>
+                    <p class="text-muted small">
+                        <strong>Analytical Focus:</strong> Slicing national fuel price behavior by World Bank Income Level (High, Upper Middle, Lower Middle, Low) and Subsidy Level.
+                    </p>
+                    <div class="p-3 bg-light rounded-2 border border-dashed">
+                        <small class="text-secondary d-block fst-italic">
+                            [Placeholder: Insert your analysis on how lower and middle-income nations rely on subsidy cushions to protect vulnerable populations, versus market-based pass-through mechanisms.]
+                        </small>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Conclusion & Policy Takeaways -->
+    <div class="card border-0 shadow-sm p-4 bg-light rounded-3">
+        <h4 class="fw-bold text-navy mb-2"><i class="bi bi-award text-teal me-2"></i>Analytical Conclusion</h4>
+        <p class="text-muted mb-2">
+            The analysis illustrates that global retail fuel prices are fundamentally determined by political and fiscal policy choices rather than pure crude extraction costs. While crude benchmarks establish a baseline floor, government tax duties and subsidy allocations govern consumer affordability and price volatility across nations.
+        </p>
+        <div class="p-3 bg-white rounded-2 border border-dashed">
+            <small class="text-secondary d-block fst-italic">
+                [Placeholder: Finalize your project's concluding summary and policy recommendations here after reviewing all Tableau Story slides.]
+            </small>
+        </div>
+    </div>
+</div>
+{% endblock %}
+

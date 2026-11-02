@@ -1,0 +1,65 @@
+{% extends "base.html" %}
+
+{% block title %}Contact & Inquiries - Global Fuel Analytics{% endblock %}
+
+{% block content %}
+<div class="container py-5">
+    <div class="row justify-content-center">
+        <div class="col-lg-8">
+            <nav aria-label="breadcrumb">
+                <ol class="breadcrumb mb-1">
+                    <li class="breadcrumb-item"><a href="{{ url_for('home') }}" class="text-decoration-none">Home</a></li>
+                    <li class="breadcrumb-item active" aria-current="page">Contact</li>
+                </ol>
+            </nav>
+            <h1 class="fw-bold text-navy mb-2">Contact & Inquiries</h1>
+            <p class="text-muted mb-4">
+                Have questions regarding the dataset, Tableau visualizations, or analytical findings? Send a message below or connect with the project author.
+            </p>
+
+            <div class="card border-0 shadow-sm p-4 rounded-3 mb-4">
+                <form method="POST" action="{{ url_for('contact') }}">
+                    <div class="mb-3">
+                        <label for="name" class="form-label fw-semibold text-navy">Full Name <span class="text-danger">*</span></label>
+                        <input type="text" class="form-control" id="name" name="name" placeholder="Enter your full name" required>
+                    </div>
+
+                    <div class="mb-3">
+                        <label for="email" class="form-label fw-semibold text-navy">Email Address <span class="text-danger">*</span></label>
+                        <input type="email" class="form-control" id="email" name="email" placeholder="name@example.com" required>
+                    </div>
+
+                    <div class="mb-3">
+                        <label for="subject" class="form-label fw-semibold text-navy">Subject</label>
+                        <input type="text" class="form-control" id="subject" name="subject" placeholder="Project Inquiry / Feedback">
+                    </div>
+
+                    <div class="mb-3">
+                        <label for="message" class="form-label fw-semibold text-navy">Message <span class="text-danger">*</span></label>
+                        <textarea class="form-control" id="message" name="message" rows="5" placeholder="Share your thoughts, suggestions, or project feedback..." required></textarea>
+                    </div>
+
+                    <button type="submit" class="btn btn-primary px-4 py-2" style="background-color: #0d9488; border-color: #0d9488;">
+                        <i class="bi bi-send-fill me-1"></i> Send Message
+                    </button>
+                </form>
+            </div>
+
+            <!-- Author & Project Metadata -->
+            <div class="card border-0 bg-light p-4 rounded-3">
+                <h6 class="fw-bold text-navy mb-2"><i class="bi bi-person-badge text-teal me-2"></i>Project Submission Details</h6>
+                <p class="small text-muted mb-1">
+                    <strong>Project Title:</strong> Global Fuel Prices and Taxation Trends: A Comprehensive Analysis
+                </p>
+                <p class="small text-muted mb-1">
+                    <strong>Author / Student:</strong> Mahima
+                </p>
+                <p class="small text-muted mb-0">
+                    <strong>Technology Stack:</strong> Python Flask, Tableau Public, HTML5, CSS3, JavaScript, Bootstrap 5
+                </p>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+

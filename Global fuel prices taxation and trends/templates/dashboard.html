@@ -1,0 +1,125 @@
+{% extends "base.html" %}
+
+{% block title %}Interactive Dashboard - Global Fuel Analytics{% endblock %}
+
+{% block content %}
+<div class="container py-4">
+    <!-- Breadcrumb & Page Header -->
+    <div class="d-flex flex-column flex-md-row justify-content-between align-items-md-center mb-4">
+        <div>
+            <nav aria-label="breadcrumb">
+                <ol class="breadcrumb mb-1">
+                    <li class="breadcrumb-item"><a href="{{ url_for('home') }}" class="text-decoration-none">Home</a></li>
+                    <li class="breadcrumb-item active" aria-current="page">Dashboard</li>
+                </ol>
+            </nav>
+            <h1 class="fw-bold text-navy mb-0">Global Fuel Analytics Dashboard</h1>
+            <p class="text-muted small mb-0">
+                Interactive Tableau Public dashboard for evaluating global fuel price variations, taxation shares, and regional trends.
+            </p>
+        </div>
+
+        <!-- Quick actions -->
+        <div class="mt-3 mt-md-0 d-flex gap-2">
+            <button id="btn-fullscreen" class="btn btn-sm btn-outline-secondary">
+                <i class="bi bi-arrows-fullscreen"></i> Fullscreen
+            </button>
+            <button id="btn-reload-viz" class="btn btn-sm btn-outline-secondary">
+                <i class="bi bi-arrow-clockwise"></i> Reload
+            </button>
+            <a href="{{ dashboard_url }}" target="_blank" rel="noopener noreferrer" class="btn btn-sm btn-primary" style="background-color: #0d9488; border-color: #0d9488;">
+                <i class="bi bi-box-arrow-up-right me-1"></i> Open on Tableau Public
+            </a>
+        </div>
+    </div>
+
+    <!-- Beginner Configuration Guide Callout -->
+    <div class="info-callout">
+        <div class="info-callout-title">
+            <i class="bi bi-info-circle-fill"></i> How to connect your own Tableau Dashboard:
+        </div>
+        <p class="info-callout-text">
+            Publish your workbook to Tableau Public, click the <strong>Share</strong> button on your visualization, copy the link, and paste it into the <code>TABLEAU_CONFIG["DASHBOARD_URL"]</code> setting inside <code>app.py</code>. The application will automatically embed your published visualization below.
+        </p>
+    </div>
+
+    <!-- Main Tableau Visualization Container -->
+    <div class="tableau-wrapper" id="tableau-container">
+        <!-- Toolbar header -->
+        <div class="tableau-toolbar">
+            <div class="tableau-status">
+                <span class="status-dot"></span>
+                <span>Tableau Public Interactive View</span>
+            </div>
+            
+            <div class="d-flex align-items-center gap-2 small">
+                <button class="btn btn-sm btn-link text-decoration-none p-0 text-muted" id="btn-copy-url" data-url="{{ dashboard_url }}">
+                    <i class="bi bi-clipboard me-1"></i> Copy URL
+                </button>
+                <span class="text-muted">|</span>
+                <span class="text-secondary"><i class="bi bi-mouse2 me-1"></i> Tooltips & Filters Active</span>
+            </div>
+        </div>
+
+        <!-- Tableau Iframe / Embed element -->
+        <div class="ratio ratio-16x9" style="min-height: 750px;">
+            <iframe
+                id="tableau-frame"
+                class="tableau-embed-frame"
+                src="{{ dashboard_embed_url | safe }}"
+                title="Global Fuel Prices and Taxation Trends Dashboard"
+                allowfullscreen="true"
+                loading="lazy">
+            </iframe>
+        </div>
+
+        <!-- Fallback Message Container (shown if embedding is blocked or fails) -->
+        <div class="tableau-fallback mt-3">
+            <i class="bi bi-display"></i>
+            <h5 class="fw-bold text-navy mt-2">Cannot see the dashboard above?</h5>
+            <p class="text-muted small mx-auto" style="max-width: 600px;">
+                Tableau Public dashboards might take a few moments to initialize, or third-party cookies / tracking prevention in your browser may restrict iframe embedding. You can always view and interact with the full dashboard directly on Tableau Public.
+            </p>
+            <div class="d-flex justify-content-center gap-2 mt-3">
+                <a href="{{ dashboard_url }}" target="_blank" rel="noopener noreferrer" class="btn btn-outline-primary btn-sm">
+                    <i class="bi bi-box-arrow-up-right me-1"></i> Open Dashboard Directly
+                </a>
+                <button class="btn btn-outline-secondary btn-sm" onclick="document.getElementById('tableau-frame').src=document.getElementById('tableau-frame').src;">
+                    <i class="bi bi-arrow-repeat me-1"></i> Retry Loading
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Interactive Features Guide -->
+    <div class="row g-4 mt-4">
+        <div class="col-md-4">
+            <div class="p-3 bg-white border rounded-3 h-100">
+                <h6 class="fw-bold text-navy mb-2"><i class="bi bi-funnel-fill text-teal me-2"></i>Using Interactive Filters</h6>
+                <p class="small text-muted mb-0">
+                    Use the dropdowns and checkboxes inside the Tableau dashboard to segment prices by geographical <strong>Region</strong>, <strong>Income Level</strong>, or individual <strong>Country</strong>.
+                </p>
+            </div>
+        </div>
+
+        <div class="col-md-4">
+            <div class="p-3 bg-white border rounded-3 h-100">
+                <h6 class="fw-bold text-navy mb-2"><i class="bi bi-cursor-fill text-teal me-2"></i>Hover for Tooltips</h6>
+                <p class="small text-muted mb-0">
+                    Hover over data points, bars, or map choropleths to view detailed breakdowns of <strong>Brent Crude</strong>, <strong>Tax Percentage</strong>, and retail liter prices.
+                </p>
+            </div>
+        </div>
+
+        <div class="col-md-4">
+            <div class="p-3 bg-white border rounded-3 h-100">
+                <h6 class="fw-bold text-navy mb-2"><i class="bi bi-calendar3 text-teal me-2"></i>Temporal Comparison</h6>
+                <p class="small text-muted mb-0">
+                    Adjust the <strong>Date</strong> slider or selector to inspect macroeconomic fuel price shocks and observe tax policy responses over time.
+                </p>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
